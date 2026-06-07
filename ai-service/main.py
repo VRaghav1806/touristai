@@ -65,7 +65,7 @@ class IngestRequest(BaseModel):
 def read_root():
     return {"message": "Tourist AI - RAG Service is running"}
 
-@app.get("/api/keepalive")
+@app.api_route("/api/keepalive", methods=["GET", "HEAD"])
 def keep_alive():
     """Endpoint to keep both Render and HuggingFace awake via a cron job"""
     try:
