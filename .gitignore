@@ -14,7 +14,7 @@ env/
 .venv/
 
 # AI Service / Database
-faiss_index/
+
 
 # OS / Editor
 .DS_Store
