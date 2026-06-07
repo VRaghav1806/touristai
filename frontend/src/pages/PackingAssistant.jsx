@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Sun, Calendar, Loader2, CheckSquare, Square, Sparkles } from 'lucide-react';
 import axios from 'axios';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import LottieExport from 'lottie-react';
+import { useEffect } from 'react';
 
+const Lottie = LottieExport.default || LottieExport;
 
 const PackingAssistant = () => {
   const [destination, setDestination] = useState('');
@@ -16,6 +18,13 @@ const PackingAssistant = () => {
   
   // Track checked state for items
   const [checkedItems, setCheckedItems] = useState({});
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    fetch('/animations/tajmahal.json')
+      .then(res => res.json())
+      .then(data => setAnimationData(data));
+  }, []);
 
   const generateList = async (e) => {
     e.preventDefault();
@@ -85,13 +94,15 @@ Group the items strictly using the following format with absolutely no intro or 
       {/* Background Animation */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-slate-50"></div>
-        <DotLottieReact
-          src="/animations/tajmahal.lottie"
-          loop
-          autoplay
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          style={{ width: '100%', height: '100%' }}
-        />
+        {animationData && (
+          <Lottie 
+            animationData={animationData} 
+            loop={true} 
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
+            style={{ width: '100%', height: '100%' }}
+          />
+        )}
         <div className="absolute inset-0 bg-slate-800/10 backdrop-blur-[3px] pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/10 to-transparent pointer-events-none"></div>
       </div>
