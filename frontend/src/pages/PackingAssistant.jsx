@@ -21,7 +21,9 @@ const PackingAssistant = () => {
   const [animationData, setAnimationData] = useState(null);
 
   useEffect(() => {
-    import('../assets/tajmahal.json').then(data => setAnimationData(data.default));
+    fetch('/animations/tajmahal.json')
+      .then(res => res.json())
+      .then(data => setAnimationData(data));
   }, []);
 
   const generateList = async (e) => {

@@ -12,9 +12,9 @@ const Home = () => {
   const [currentAnimIndex, setCurrentAnimIndex] = useState(0);
 
   useEffect(() => {
-    import('../assets/icelands.json').then(data => {
-      setAnimations([data.default]);
-    });
+    fetch('/animations/icelands.json')
+      .then(res => res.json())
+      .then(data => setAnimations([data]));
   }, []);
 
   const handleAnimationComplete = () => {

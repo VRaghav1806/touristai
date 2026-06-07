@@ -23,7 +23,9 @@ const TripPlanner = () => {
   const [animationData, setAnimationData] = useState(null);
 
   useEffect(() => {
-    import('../assets/hills.json').then(data => setAnimationData(data.default));
+    fetch('/animations/hills.json')
+      .then(res => res.json())
+      .then(data => setAnimationData(data));
   }, []);
 
   const handleDownloadPDF = async () => {

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Bot, Send, User, Sparkles } from 'lucide-react';
 import axios from 'axios';
 import LottieExport from 'lottie-react';
-import chataniAnimation from '../assets/chatani.json?url';
+// unused import removed
 
 const Lottie = LottieExport.default || LottieExport;
 
@@ -25,7 +25,9 @@ const Chatbot = () => {
 
   const [animationData, setAnimationData] = useState(null);
   useEffect(() => {
-    import('../assets/chatani.json').then(data => setAnimationData(data.default));
+    fetch('/animations/chatani.json')
+      .then(res => res.json())
+      .then(data => setAnimationData(data));
   }, []);
 
   const handleSend = async (e) => {
