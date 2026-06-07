@@ -39,7 +39,7 @@ We will deploy the `ai-service` folder as another Web Service on Render.
    - **Root Directory**: `ai-service` *(Crucial!)*
    - **Environment**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - **Start Command**: `python main.py`
    - **Instance Type**: Free
 4. Scroll down to **Environment Variables** and add:
    - `GROQ_API_KEY`: *[Your Groq API key]*
