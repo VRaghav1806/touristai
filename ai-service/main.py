@@ -65,6 +65,17 @@ class IngestRequest(BaseModel):
 def read_root():
     return {"message": "Tourist AI - RAG Service is running"}
 
+@app.get("/api/keepalive")
+def keep_alive():
+    """Endpoint to keep both Render and HuggingFace awake via a cron job"""
+    try:
+        # Make a tiny request to keep HF API awake
+        if embeddings:
+            embeddings.embed_query("ping")
+        return {"status": "awake"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
 @app.post("/api/ingest")
 def ingest_data(req: IngestRequest):
     global vector_store
