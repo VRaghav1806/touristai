@@ -4,7 +4,6 @@ langchain
 langchain-groq
 langchain-community
 langchain-huggingface
-sentence-transformers
 faiss-cpu
 python-dotenv
 beautifulsoup4
