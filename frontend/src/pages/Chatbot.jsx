@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Bot, Send, User, Sparkles } from 'lucide-react';
 import axios from 'axios';
-import LottieExport from 'lottie-react';
-// unused import removed
-
-const Lottie = LottieExport.default || LottieExport;
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -22,13 +19,6 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages, loading]);
-
-  const [animationData, setAnimationData] = useState(null);
-  useEffect(() => {
-    fetch('/animations/chatani.json')
-      .then(res => res.json())
-      .then(data => setAnimationData(data));
-  }, []);
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -57,15 +47,13 @@ const Chatbot = () => {
       {/* Background Animation */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-slate-50"></div>
-        {animationData && (
-          <Lottie 
-            animationData={animationData} 
-            loop={true} 
-            className="absolute inset-0 w-full h-full object-cover"
-            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
-            style={{ width: '100%', height: '100%' }}
-          />
-        )}
+        <DotLottieReact
+          src="/animations/chatani.lottie"
+          loop
+          autoplay
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ width: '100%', height: '100%' }}
+        />
         <div className="absolute inset-0 bg-slate-800/10 backdrop-blur-[3px]"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/10 to-transparent"></div>
       </div>

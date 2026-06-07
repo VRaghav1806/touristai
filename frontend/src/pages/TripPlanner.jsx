@@ -5,10 +5,8 @@ import { MapPin, Calendar, Wallet, Navigation } from 'lucide-react';
 import axios from 'axios';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
-import LottieExport from 'lottie-react';
-import { useEffect } from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const Lottie = LottieExport.default || LottieExport;
 
 const TripPlanner = () => {
   const location = useLocation();
@@ -20,13 +18,6 @@ const TripPlanner = () => {
   const [itinerary, setItinerary] = useState('');
   const [loading, setLoading] = useState(false);
   const itineraryRef = useRef(null);
-  const [animationData, setAnimationData] = useState(null);
-
-  useEffect(() => {
-    fetch('/animations/hills.json')
-      .then(res => res.json())
-      .then(data => setAnimationData(data));
-  }, []);
 
   const handleDownloadPDF = async () => {
     const element = itineraryRef.current;
@@ -68,15 +59,13 @@ const TripPlanner = () => {
       {/* Background Animation */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-slate-50"></div>
-        {animationData && (
-          <Lottie 
-            animationData={animationData} 
-            loop={true} 
-            className="absolute inset-0 w-full h-full object-cover"
-            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
-            style={{ width: '100%', height: '100%' }}
-          />
-        )}
+        <DotLottieReact
+          src="/animations/hills.lottie"
+          loop
+          autoplay
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ width: '100%', height: '100%' }}
+        />
         <div className="absolute inset-0 bg-slate-800/10 backdrop-blur-[3px]"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/10 to-transparent"></div>
       </div>

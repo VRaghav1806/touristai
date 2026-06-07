@@ -2,37 +2,23 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import LottieExport from 'lottie-react'
-import { useEffect } from 'react'
-
-const Lottie = LottieExport.default || LottieExport;
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Home = () => {
-  const [animations, setAnimations] = useState([]);
-  const [currentAnimIndex, setCurrentAnimIndex] = useState(0);
-
-  useEffect(() => {
-    fetch('/animations/icelands.json')
-      .then(res => res.json())
-      .then(data => setAnimations([data]));
-  }, []);
-
   const handleAnimationComplete = () => {
-    setCurrentAnimIndex((prevIndex) => (prevIndex + 1) % animations.length);
+    // Current component only uses 1 animation now
   };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-slate-900 text-white">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {animations.length > 0 && (
-          <Lottie 
-            key={currentAnimIndex}
-            animationData={animations[currentAnimIndex]} 
-            loop={true} 
-            className="absolute inset-0 w-full h-full opacity-40 scale-125 object-cover pointer-events-none"
-          />
-        )}
+        <DotLottieReact
+          src="/animations/icelands.lottie"
+          loop
+          autoplay
+          className="absolute inset-0 w-full h-full opacity-40 scale-125 object-cover pointer-events-none"
+        />
         <div className="absolute inset-0 bg-slate-900/60 pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/5 rounded-full pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full pointer-events-none"></div>
