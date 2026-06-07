@@ -7,7 +7,7 @@ from typing import Optional
 from contextlib import asynccontextmanager
 
 from langchain_groq import ChatGroq
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.prompts import ChatPromptTemplate
@@ -46,7 +46,11 @@ llm = ChatGroq(
 )
 
 # Initialize Embeddings
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+hf_token = os.getenv("HF_TOKEN", "hf_dummy_token_to_prevent_error")
+embeddings = HuggingFaceEndpointEmbeddings(
+    model="sentence-transformers/all-MiniLM-L6-v2",
+    huggingfacehub_api_token=hf_token
+)
 
 # Global Vector Store Variable
 vector_store: Optional[FAISS] = None
