@@ -96,7 +96,8 @@ const InteractiveMap = () => {
     setLoadingFacts(true);
     setFacts('');
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/chat', { 
+      const AI_API_URL = import.meta.env.VITE_AI_API_URL || 'http://127.0.0.1:8000';
+      const res = await axios.post(`${AI_API_URL}/api/chat`, { 
         query: `Give me 2 very brief, interesting quick facts about the Indian state of ${selectedState}. Format as a short list without intro.` 
       });
       setFacts(res.data.response);

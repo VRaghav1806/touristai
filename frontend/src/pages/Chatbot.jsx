@@ -34,7 +34,8 @@ const Chatbot = () => {
 
     try {
       // Connect to Python AI Service
-      const res = await axios.post('http://127.0.0.1:8000/api/chat', { query: userMessage.content });
+      const AI_API_URL = import.meta.env.VITE_AI_API_URL || 'http://127.0.0.1:8000';
+      const res = await axios.post(`${AI_API_URL}/api/chat`, { query: userMessage.content });
       setMessages(prev => [...prev, { role: 'assistant', content: res.data.response }]);
     } catch (error) {
       console.error(error);

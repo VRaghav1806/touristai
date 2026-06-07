@@ -48,7 +48,8 @@ Group the items strictly using the following format with absolutely no intro or 
 ## 🧴 Health & Toiletries
 - Item 1: Reason`;
 
-      const res = await axios.post('http://127.0.0.1:8000/api/chat', { query: prompt });
+      const AI_API_URL = import.meta.env.VITE_AI_API_URL || 'http://127.0.0.1:8000';
+      const res = await axios.post(`${AI_API_URL}/api/chat`, { query: prompt });
       
       const text = res.data.response;
       const categories = {};

@@ -46,7 +46,8 @@ const TripPlanner = () => {
     
     try {
       const query = `Plan a ${formData.days}-day trip to ${formData.destination} with a ${formData.budget} budget. Include hotels, restaurants, and daily activities.`;
-      const res = await axios.post('http://127.0.0.1:8000/api/chat', { query });
+      const AI_API_URL = import.meta.env.VITE_AI_API_URL || 'http://127.0.0.1:8000';
+      const res = await axios.post(`${AI_API_URL}/api/chat`, { query });
       setItinerary(res.data.response);
     } catch (error) {
       setItinerary('Failed to generate itinerary. Please try again.');

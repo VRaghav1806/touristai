@@ -19,7 +19,8 @@ const StateDestinations = () => {
 1. [Destination Name]: [One short, exciting sentence describing it.] | [Latitude],[Longitude]
 2. [Destination Name]: [One short, exciting sentence describing it.] | [Latitude],[Longitude]`;
 
-        const res = await axios.post('http://127.0.0.1:8000/api/chat', { query: prompt });
+        const AI_API_URL = import.meta.env.VITE_AI_API_URL || 'http://127.0.0.1:8000';
+        const res = await axios.post(`${AI_API_URL}/api/chat`, { query: prompt });
         
         // Parse the response
         const lines = res.data.response.split('\n').filter(line => line.trim().length > 0);
