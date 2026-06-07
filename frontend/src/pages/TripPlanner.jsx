@@ -148,7 +148,7 @@ const TripPlanner = () => {
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="md:col-span-2 bg-white p-8 rounded-2xl shadow-sm border border-gray-100 h-[calc(100vh-10rem)] overflow-y-auto"
+          className="md:col-span-2 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 min-h-[500px] md:h-[calc(100vh-10rem)] overflow-y-auto"
         >
           {loading ? (
             <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4">

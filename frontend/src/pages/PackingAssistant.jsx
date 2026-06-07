@@ -109,7 +109,7 @@ Group the items strictly using the following format with absolutely no intro or 
 
       <div className="max-w-4xl mx-auto px-4 relative z-10 w-full h-full flex flex-col">
         
-        <div className="bg-white/60 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-slate-900/10 border border-white/60 flex-1 overflow-y-auto flex flex-col scrollbar-hide">
+        <div className="bg-white/60 backdrop-blur-xl rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-10 shadow-2xl shadow-slate-900/10 border border-white/60 flex-1 overflow-y-auto flex flex-col scrollbar-hide">
           <div className="text-center mb-10">
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
               Smart Packing Assistant

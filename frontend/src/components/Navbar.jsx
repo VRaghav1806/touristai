@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Map, Bot, Compass, Navigation } from 'lucide-react'
+import { Map, Bot, Compass, Navigation, Menu, X } from 'lucide-react'
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -28,8 +29,34 @@ const Navbar = () => {
               AI Assistant
             </Link>
           </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`p-2 rounded-md ${isHome ? 'text-gray-900' : 'text-white'}`}
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white shadow-xl border-t border-gray-100">
+          <div className="px-4 pt-2 pb-6 flex flex-col space-y-4">
+            <Link to="/explore" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-indigo-600 font-medium py-2">Explore</Link>
+            <Link to="/planner" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-indigo-600 font-medium py-2">Planner</Link>
+            <Link to="/map" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-indigo-600 font-medium py-2">Map</Link>
+            <Link to="/packing" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-indigo-600 font-medium py-2">Packing AI</Link>
+            <Link to="/chat" onClick={() => setIsOpen(false)} className="bg-indigo-600 text-white px-4 py-3 rounded-full flex items-center justify-center gap-2 font-semibold shadow-md mt-2">
+              <Bot className="h-5 w-5" />
+              AI Assistant
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
