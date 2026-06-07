@@ -3,13 +3,19 @@ import { motion } from 'framer-motion'
 import { Bot, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import LottieExport from 'lottie-react'
-import icelandsAnimation from '../assets/icelands.json'
+import { useEffect } from 'react'
 
 const Lottie = LottieExport.default || LottieExport;
 
 const Home = () => {
-  const animations = [icelandsAnimation];
+  const [animations, setAnimations] = useState([]);
   const [currentAnimIndex, setCurrentAnimIndex] = useState(0);
+
+  useEffect(() => {
+    import('../assets/icelands.json').then(data => {
+      setAnimations([data.default]);
+    });
+  }, []);
 
   const handleAnimationComplete = () => {
     setCurrentAnimIndex((prevIndex) => (prevIndex + 1) % animations.length);
@@ -19,12 +25,14 @@ const Home = () => {
     <div className="min-h-screen relative overflow-hidden bg-slate-900 text-white">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <Lottie 
-          key={currentAnimIndex}
-          animationData={animations[currentAnimIndex]} 
-          loop={true} 
-          className="absolute inset-0 w-full h-full opacity-40 scale-125 object-cover pointer-events-none"
-        />
+        {animations.length > 0 && (
+          <Lottie 
+            key={currentAnimIndex}
+            animationData={animations[currentAnimIndex]} 
+            loop={true} 
+            className="absolute inset-0 w-full h-full opacity-40 scale-125 object-cover pointer-events-none"
+          />
+        )}
         <div className="absolute inset-0 bg-slate-900/60 pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/5 rounded-full pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full pointer-events-none"></div>

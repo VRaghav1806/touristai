@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 import LottieExport from 'lottie-react';
-import hillsAnimation from '../assets/hills.json';
+import { useEffect } from 'react';
 
 const Lottie = LottieExport.default || LottieExport;
 
@@ -20,6 +20,11 @@ const TripPlanner = () => {
   const [itinerary, setItinerary] = useState('');
   const [loading, setLoading] = useState(false);
   const itineraryRef = useRef(null);
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    import('../assets/hills.json').then(data => setAnimationData(data.default));
+  }, []);
 
   const handleDownloadPDF = async () => {
     const element = itineraryRef.current;
@@ -61,13 +66,15 @@ const TripPlanner = () => {
       {/* Background Animation */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-slate-50"></div>
-        <Lottie 
-          animationData={hillsAnimation} 
-          loop={true} 
-          className="absolute inset-0 w-full h-full object-cover"
-          rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
-          style={{ width: '100%', height: '100%' }}
-        />
+        {animationData && (
+          <Lottie 
+            animationData={animationData} 
+            loop={true} 
+            className="absolute inset-0 w-full h-full object-cover"
+            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
+            style={{ width: '100%', height: '100%' }}
+          />
+        )}
         <div className="absolute inset-0 bg-slate-800/10 backdrop-blur-[3px]"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/10 to-transparent"></div>
       </div>
